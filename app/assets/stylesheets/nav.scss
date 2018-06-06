@@ -1,0 +1,15 @@
+nav {
+  font-size: 18px;
+  display: grid;
+  grid-template-columns: 1fr;
+   grid-auto-flow: column;
+
+  .menu {
+    display: flex;
+    float: right;
+
+    a {
+      padding:10px 20px;
+    }
+  }
+}

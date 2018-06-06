@@ -1,0 +1,90 @@
+/* reset css */
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: #F5F5F5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0px;
+  padding: 0px;
+}
+
+ul, ol {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+a, a:hover, a:focus {
+  margin: 0px;
+  padding: 0px;
+  text-decoration: none;
+  color: #000;
+}
+
+.admin-a, .admin-a:hover {
+  color: #fff;
+}
+
+.admin-btn, .admin-btn:hover {
+  padding: 5px 10px;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  display: block; 
+}
+
+.btn, button, button:focus{
+  outline:0px !important; 
+}
+
+button[disabled] {
+  pointer-events: none;
+}
+
+.clearfix::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* common setting */
+
+:root {
+  --bggray: #F5F5F5;
+  --lblack: #3C3C3C;
+  --dwhite: #D4D4D4;;
+};
+
+.container {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.shadow-box {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px rgba(0, 0, 0, .12);
+}
+
+.shadow-box-light {
+  box-shadow: 0 2px 2px 0 rgba(41,48,59,.24), 0 0 2px 0 rgba(41,48,59,.12);
+}
+
+.close-btn {
+  cursor: pointer;
+}
