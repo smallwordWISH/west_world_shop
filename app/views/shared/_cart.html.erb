@@ -41,6 +41,12 @@
   <div>
     <h5>Total Amount:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$<%= current_cart.calculate_total_amount %></h5>
   </div>
+  <div class="cart-details-btn">
+    <%= link_to cart_path do %>
+      <button class="btn btn-primary">View Cart Details</button>
+    <% end %>
+  </div>
 <% else %>
   <em>There is nothing in your cart.</em>
 <% end %>
+

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     post :add_to_cart, on: :member  
   end
 
-  resources :cart
+  resource :cart, only: [:show]
   
   resources :cart_items, only:[:destroy] do
     member do
@@ -16,6 +16,10 @@ Rails.application.routes.draw do
       patch :minus
     end
   end
+
+  resources :orders, only: [:create]
+
+  resources :order_items
 
 
   namespace :admin do

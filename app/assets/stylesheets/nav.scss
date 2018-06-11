@@ -11,6 +11,8 @@ nav {
   font-size: 18px;
   background: #222;
   color: #FFF;
+  z-index: 1000;
+
   .container  {
     display: grid;
     grid-template-columns: 1fr;
@@ -47,6 +49,8 @@ nav {
   bottom: 0px;
   width: 300px;
   padding: 20px;
+  overflow: auto;
+  z-index: 1000;
   transition: all 0.2s;
 
   h3 { display: inline-block; }
@@ -76,5 +80,9 @@ nav {
     h5 { padding-top: 5px; }
     .trash-btn { justify-self: end; }
   }
-
+  
+  .cart-details-btn {
+    margin-top: 20px;
+    text-align: center;
+  }
 }

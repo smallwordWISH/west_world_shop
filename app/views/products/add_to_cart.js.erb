@@ -1,3 +1,5 @@
 var html = '<%= j render partial: "shared/cart" %>';
+var tableHtml = '<%= j render partial: "shared/cart_table" %>'
 
 $('.cart-panel').html(html);
+$('.cart-card .card-body').html(tableHtml);

@@ -1,0 +1,30 @@
+.cart-card, .shipping-info-card {
+  margin: 20px 0;
+}
+
+table.cart-table {
+  
+  tr:first-of-type th {
+    border: none;
+  }
+
+  .cart-table-img-name {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    grid-gap: 20px;
+  }
+
+  .cart-item-bottom {
+    display: grid;
+    grid-template-columns: repeat(3, 30px);
+    grid-gap: 10px;
+
+    h6 { padding-top: 8px; }
+  }
+}
+
+form .order-form {
+  display: grid;
+  grid-template-columns: 120px 600px;
+  grid-gap: 20px;
+}

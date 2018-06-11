@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180606144338) do
+ActiveRecord::Schema.define(version: 20180611120108) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer "quantity", default: 1
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20180606144338) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "sn"
+    t.string "sn"
     t.float "total_amount"
     t.string "shipping_name"
     t.string "shipping_phone"
