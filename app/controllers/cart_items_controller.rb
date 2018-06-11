@@ -4,19 +4,23 @@ class CartItemsController < ApplicationController
   def destroy
     @cart_item.destroy
 
-    redirect_to root_path
+    render "products/add_to_cart"
   end
 
   def plus
     quantity = @cart_item.quantity + 1
 
     @cart_item.update_attributes(quantity: quantity)    
+
+    render "products/add_to_cart"
   end
 
   def minus
     quantity = @cart_item.quantity - 1
 
-    @cart_item.update_attributes(quantity: quantity) 
+    @cart_item.update_attributes(quantity: quantity)
+
+    render "products/add_to_cart" 
   end
 
   private

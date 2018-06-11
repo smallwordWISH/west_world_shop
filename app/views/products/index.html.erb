@@ -10,7 +10,7 @@
           $<%= product.price.round %>
         </div>
         <div>
-          <%= link_to add_to_cart_product_path(product), method: :post do %>
+          <%= link_to add_to_cart_product_path(product), method: :post, remote: true do %>
             <button class="btn btn-primary">Add to cart</button>
           <% end %>
         </div>
