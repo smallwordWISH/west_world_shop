@@ -4,11 +4,23 @@ Rails.application.routes.draw do
 
   root "products#index"
 
-  resources :products, only: [:index, :show]
+  resources :products, only: [:index, :show] do
+    post :add_to_cart, on: :member  
+  end
+
+  resources :cart
   
+  resources :cart_items, only:[:destroy] do
+    member do
+      patch :plus
+      patch :minus
+    end
+  end
+
+
   namespace :admin do
     resources :products, except: [:show]
-    resources :order, only: [:edit, :update]
+    resources :orders, only: [:edit, :update]
 
     root "products#index"
   end

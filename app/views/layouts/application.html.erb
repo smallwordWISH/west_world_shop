@@ -5,23 +5,97 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'true' %>
   </head>
-
   <body>
     <header>
-      <div class="container">
-        <nav>
-          <div class="logo"><%= link_to 'West World', root_path %></div>
+      <nav>
+        <div class="container">
+          <div class="logo"><%= link_to 'West World Shop', root_path %></div>
           <div class="menu">
             <div><%= link_to 'Admin panel', admin_root_path %></div>
-            <div>Cart</div>
+            <div class="cart-btn">Cart</div>
             <div>Oder</div>
-            <div>Login</div>
-          </div>
-        </nav>        
-      </div>
+            <% if current_user %>
+              <div><%= link_to 'Logout', destroy_user_session_path, method: :delete %></div>
+            <% else %>
+              <div><%= link_to('Sign up', new_user_registration_path ) %></div>>
+              <div><%= link_to('Sign in', new_user_session_path ) %></div>
+            <% end %>
+          </div>      
+        </div>
+      </nav>  
     </header>
+    <div class="alert-row">
+      <% if flash[:notice] %>
+        <div class="notice alert alert-success" role="alert">
+          <div class="container">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+            <div class="text-center">
+              <%= flash[:notice] %>
+            </div>
+          </div>
+        </div>
+      <% elsif flash[:alert]%> 
+        <div class="alert alert-danger" role="alert">
+          <div class="container">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+            <div class="text-center">
+              <%= flash[:alert] %>
+            </div>
+          </div>
+        </div>               
+      <% end %>
+    </div>
+    <div class="cart-panel shadow-box">
+      <h3>Cart</h3>
+      <div class="close-btn"><i class="fa fa-times"></i></div>
+      <hr />
+      <% if current_cart.cart_items.length != 0 %>
+        <% current_cart.cart_items.each do |cart_item| %>
+          <div class="cart-item">
+            <div class="cart-item-top">
+              <div class="cart-item-img">
+                <%= image_tag(cart_item.product.image) %>
+              </div>
+              <div class="cart-item-info">
+                <h6><%= cart_item.product.name %></h6>
+                <h6>$<%= cart_item.product.price.round %></h6>
+              </div>
+            </div>
+            <div class="cart-item-bottom">
+              <div>
+                <%= link_to plus_cart_item_path(cart_item), method: :patch do %>
+                  <button class="btn btn-sm btn-warning"><i class="fa fa-plus"></i></button>
+                <% end %> 
+              </div>
+              <h5 class="text-center"><%= cart_item.quantity %></h5>
+              <% if cart_item.quantity == 1 %>
+                <button class="btn btn-sm btn-warning" disabled><i class="fa fa-minus"></i></button>
+              <% else %>
+                <div>
+                  <%= link_to minus_cart_item_path(cart_item), method: :patch do %>
+                    <button class="btn btn-sm btn-warning"><i class="fa fa-minus"></i></button>
+                  <% end %> 
+                </div>
+              <% end %>
+              <div class="trash-btn">
+                <%= link_to cart_item_path(cart_item), method: :delete, data: {confirm: "Are you sure to delete #{cart_item.product.name} from cart?"} do %>
+                  <button class="btn btn-sm"><i class="fa fa-trash"></i></button>
+                <% end %> 
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <hr />
+        <div>
+          <h5>Total Amount:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$<%= current_cart.calculate_total_amount %></h5>
+        </div>
+      <% else %>
+        <em>There is nothing in your cart.</em>
+      <% end %>
+    </div>
+    </div> 
     <%= yield %>
   </body>
 </html>

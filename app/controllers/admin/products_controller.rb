@@ -1,5 +1,7 @@
 class Admin::ProductsController < Admin::BaseController
-  before_action :set_product, only: [:edit, :update, :destroy]
+  before_action :set_product, only: [:edit, :update, :destroy, :add_to_cart]
+
+  helper_method :current_cart
 
   def index
     @products = Product.all.order(created_at: :desc)
@@ -39,4 +41,5 @@ class Admin::ProductsController < Admin::BaseController
   def product_params
     params.require(:product).permit(:name, :description, :price, :image)
   end
+
 end

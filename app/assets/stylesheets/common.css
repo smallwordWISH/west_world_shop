@@ -87,4 +87,5 @@ button[disabled] {
 
 .close-btn {
   cursor: pointer;
+  color: var(--red);
 }
