@@ -2,6 +2,13 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
 
   def create
+
+    if current_cart.cart_items.length == 0
+      flash[:alert] = "There is no item in your cart."
+      redirect_to root_path
+      return
+    end
+
     order = Order.new(order_params)
     order.user = current_user
     order.payment_status = "unpaid"
@@ -19,6 +26,8 @@ class OrdersController < ApplicationController
 
       current_cart.destroy
 
+      UserMailer.notify_order_create(order).deliver_now!
+
       redirect_to orders_path
     else
       flash[:alert] = "Fail to create order. #{order.errors.full_messages.to_sentence}"
@@ -28,7 +37,7 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.all
+    @orders = current_user.orders
   end
 
   def destroy
