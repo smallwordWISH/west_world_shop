@@ -1,3 +1,32 @@
-// Place all the styles related to the orders controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.order-card {
+  margin: 20px 0;
+  
+  .card-body {
+    display: grid;
+    grid-gap: 0 20px;
+    grid-template-areas: 
+    "product status"
+    "shipping status";
+
+    .product-area {
+      grid-area: product;
+
+      table tr td { border: none; }
+      table tr:last-of-type td { border-top: solid 1px var(--dwhite) }
+    }
+
+    .shipping-area {
+      grid-area: shipping;
+
+      p:last-of-type { grid-column: 1 / -1 }
+    }
+
+    .status-area {
+      grid-area: status;
+      align-self: center;
+      justify-self: center;
+
+      button { margin-top: 20px; }
+    }
+  }
+}

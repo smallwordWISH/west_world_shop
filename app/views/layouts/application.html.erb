@@ -15,7 +15,7 @@
           <div class="menu">
             <div><%= link_to 'Admin panel', admin_root_path %></div>
             <div class="cart-btn">Cart</div>
-            <div>Oder</div>
+            <div><%= link_to 'Order', orders_path %></div>
             <% if current_user %>
               <div><%= link_to 'Logout', destroy_user_session_path, method: :delete %></div>
             <% else %>

@@ -19,12 +19,27 @@ class OrdersController < ApplicationController
 
       current_cart.destroy
 
-      redirect_to root_path
+      redirect_to orders_path
     else
       flash[:alert] = "Fail to create order. #{order.errors.full_messages.to_sentence}"
 
       redirect_back(fallback_location: root_path)
     end
+  end
+
+  def index
+    @orders = Order.all
+  end
+
+  def destroy
+    @order = Order.find_by_id(params[:id])
+
+    if @order.destroy
+      flash[:notice] = "Order has been cancel."
+    else
+      flash[:alert] = "Fail to cancel order. #{@order.errors.full_messages.to_sentence}"
+    end
+    redirect_to orders_path
   end
 
   private
