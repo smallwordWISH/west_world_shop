@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
 
   def create
-
     if current_cart.cart_items.length == 0
       flash[:alert] = "There is no item in your cart."
       redirect_to root_path
@@ -18,14 +17,12 @@ class OrdersController < ApplicationController
 
     if order.save
       flash[:notice] = "Order has successfully created."
-
       current_cart.cart_items.each do |cart_item|
         order_item = order.order_items.build(product: cart_item.product, price: cart_item.product.price, quantity: cart_item.quantity)
         order_item.save
       end
 
       current_cart.destroy
-
       UserMailer.notify_order_create(order).deliver_now!
 
       redirect_to orders_path
@@ -43,11 +40,16 @@ class OrdersController < ApplicationController
   def destroy
     @order = Order.find_by_id(params[:id])
 
-    if @order.destroy
-      flash[:notice] = "Order has been cancel."
+    if @order.payment_status == 'Unpaid'
+      if @order.destroy
+        flash[:notice] = "Order has been canceled."
+      else
+        flash[:alert] = "Fail to cancel order. #{@order.errors.full_messages.to_sentence}"
+      end
     else
-      flash[:alert] = "Fail to cancel order. #{@order.errors.full_messages.to_sentence}"
+      flash[:alert] = "Can not delete the order which has been paid."
     end
+    
     redirect_to orders_path
   end
 

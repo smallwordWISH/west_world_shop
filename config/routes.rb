@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :products, except: [:show]
-    resources :orders, only: [:edit, :update]
+    resources :orders, only: [:index, :edit, :update, :destroy]
 
     root "products#index"
   end

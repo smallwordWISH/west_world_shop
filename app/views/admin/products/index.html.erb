@@ -1,4 +1,14 @@
 <div class="container">
+  <div class="nav nav-tabs">
+      <%= link_to admin_root_path do %>
+        <p class="nav-link active">Product</p>
+      <% end %>
+    <li class="nav-item">
+      <%= link_to admin_orders_path do %>
+        <p class="nav-link">Orders</p>
+      <% end %>
+    </li>
+  </div>
   <%= link_to new_admin_product_path do %>
     <button class="btn btn-primary">New Product</button>
   <% end %> 
@@ -12,7 +22,13 @@
     <% @products.each do |product| %>
       <tr>
         <td><%= product.name %></td>
-        <td><%= image_tag(product.image, style: "width: 100px; height: 100px; margin: 0 auto;") %></td>
+        <td>
+          <% if product.image_remote_url? %>
+            <%= image_tag(product.image_remote_url, style: "width: 100px; height: 100px; margin: 0 auto;") %>
+          <% elsif product.image? %>
+            <%= image_tag(product.image, style: "width: 100px; height: 100px; margin: 0 auto;") %>
+          <% end %>
+        </td>
         <td class="text-center">$<%= product.price %></td>
         <td class="text-center">
           <%= link_to edit_admin_product_path(product) do %>

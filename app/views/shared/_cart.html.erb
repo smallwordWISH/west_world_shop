@@ -6,7 +6,11 @@
     <div id="cart-item-<%= cart_item.id %>" class="cart-item">
       <div class="cart-item-top">
         <div class="cart-item-img">
-          <%= image_tag(cart_item.product.image) %>
+          <% if cart_item.product.image_remote_url? %>
+            <%= image_tag(cart_item.product.image_remote_url) %>
+          <% elsif cart_item.product.image? %>
+            <%= image_tag(cart_item.product.image) %>
+          <% end %>
         </div>
         <div class="cart-item-info">
           <h6><%= cart_item.product.name %></h6>

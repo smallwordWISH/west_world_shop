@@ -64,15 +64,21 @@ nav {
     display: grid;
     grid-template-columns: 1fr 3fr;
     grid-gap: 10px;
+  
+    .cart-item-img {
+      width: 80px; height: 80px;
+      overflow: hidden;
 
-  .cart-item-info {
-      padding: 10px 0;
+      img {  object-fit: cover;}
+    }
+    .cart-item-info {
+      padding: 10px 0;      
     }
   }
   
   .cart-item-bottom {
     display: grid;
-    grid-template-columns: repeat(3, 30px) 70px;
+    grid-template-columns: repeat(3, 30px) 40px;
     grid-gap: 10px;
     grid-auto-flow: column;
     justify-content: end;
@@ -85,4 +91,8 @@ nav {
     margin-top: 20px;
     text-align: center;
   }
+}
+
+.alert-row {
+  margin-bottom: 20px;
 }

@@ -1,11 +1,13 @@
 <div class="container">
-  <%= form_for product do |f| %>
+  <%= form_for [:admin, product] do |f| %>
     <%= f.label 'Product Name' %>
     <%= f.text_field :name, maxlength: 30, class: "form-control" %>
     <%= f.label 'Description' %>
     <%= f.text_area :description, maxlength: 140, class: "form-control" %>
     <%= f.label 'Price'%>
     <%= f.number_field :price, step: :any, class: "form-control" %>
+    <%= image_tag(product.image, width: '300px') if product.image? %>
+    <%= f.file_field :image %>
     <%= f.submit class: "btn btn-primary" %>
     <%= link_to admin_root_path do %>
       <button class="btn btn-danger">Cancel</button>

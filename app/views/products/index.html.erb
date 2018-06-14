@@ -3,7 +3,11 @@
     <% @products.each do |product| %>
       <div class="product-item">
         <div class="product-image">
-          <%= image_tag(product.image) %>
+          <% if product.image_remote_url? %>
+            <%= image_tag(product.image_remote_url) %>
+          <% elsif product.image? %>
+            <%= image_tag(product.image) %>
+          <% end %>
         </div>
         <div class="product-info">
           <%= product.name %>

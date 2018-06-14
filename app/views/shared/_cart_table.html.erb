@@ -9,7 +9,13 @@
   <% current_cart.cart_items.each do |cart_item| %>
     <tr>
       <td class="cart-table-img-name">
-        <div><%= image_tag(cart_item.product.image) %></div>
+        <div class="cart-table-img">          
+          <% if cart_item.product.image_remote_url? %>
+            <%= image_tag(cart_item.product.image_remote_url) %>
+          <% elsif cart_item.product.image? %>
+            <%= image_tag(cart_item.product.image) %>
+          <% end %>
+        </div>
         <div><h6><%= cart_item.product.name %><h6></div>
       </td>
       <td><h6>$<%= cart_item.product.price %></h6></td>

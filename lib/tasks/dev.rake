@@ -7,13 +7,13 @@ namespace :dev do
       name = FFaker::Product.product_name
       description = FFaker::Lorem.sentence
       price = rand(10..1000)
-      image = FFaker::Avatar.image
+      image_remote_url = FFaker::Avatar.image
 
       product = Product.new(
         name: name,
         description: description,
         price: price,
-        image: image
+        image_remote_url: image_remote_url
       )
 
       product.save!
