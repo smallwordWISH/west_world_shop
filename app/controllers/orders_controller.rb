@@ -63,8 +63,6 @@ class OrdersController < ApplicationController
         payment_method: params[:payment_method],
         total_amount: @order.total_amount
       )
-
-      render layout: false
     end
   end
 

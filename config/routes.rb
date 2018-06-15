@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :order_items
 
   post 'spgateway/return'
+  post 'spgateway/notify'
 
   namespace :admin do
     resources :products, except: [:show]

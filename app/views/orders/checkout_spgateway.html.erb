@@ -1,11 +1,14 @@
-<h3>Refering to credit card payment page, please do not close or leave this page...</h3>
+<div class="container">
+  <h3 class="text-center">Refering to credit card payment page, please do not close or leave this page...</h3>
 
-<form name='Spgateway' method='post' action=<%= Spgateway.url %>>
-  <% Spgateway.new(@payment).generate_form_data(spgateway_return_url).each do |key, value| %>
-    <%= hidden_field_tag key, value %>
-  <% end %>
-  <input type="submit" value='submit' style="visibility: hidden;">
-</form>
+  <form name='Spgateway' method='post' action=<%= Spgateway.url %>>
+    <% Spgateway.new(@payment).generate_form_data(spgateway_return_url).each do |key, value| %>
+      <%= hidden_field_tag key, value %>
+    <% end %>
+    <input type="submit" value='submit' style="visibility: hidden;">
+  </form>  
+</div>
+
 
 <script>
   document.forms[0].submit();
