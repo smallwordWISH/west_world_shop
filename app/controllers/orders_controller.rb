@@ -60,39 +60,9 @@ class OrdersController < ApplicationController
       @payment = Payment.create!(
         sn: Time.now.to_i,
         order: @order,
+        payment_method: params[:payment_method],
         total_amount: @order.total_amount
       )
-
-      spgateway_data = {
-        MerchantID: "MS34166973",
-        Version: 1.4,
-        RespondType: "JSON",
-        TimeStamp: Time.now.to_i,
-        MerchantOrderNo: "#{@payment.id}",
-        Amt: @order.total_amount.round.to_i,
-        ItemDesc: @order.sn,
-        ReturnURL: spgateway_return_url,
-        Email: @order.user.email,
-        LoginType: 0
-      }.to_query
-
-      hash_key = "a8g3vaCzZP2OOlXm0EdB4z87NsK80VKm"
-      hash_iv = "8zenp5vcccOMj8I1"
-
-      cipher = OpenSSL::Cipher::AES256.new(:CBC)
-      cipher.encrypt
-      cipher.key = hash_key
-      cipher.iv  = hash_iv
-      encrypted = cipher.update(spgateway_data) + cipher.final
-      aes = encrypted.unpack('H*').first    # binary 轉 hex
-
-      str = "HashKey=#{hash_key}&#{aes}&HashIV=#{hash_iv}"
-      sha = Digest::SHA256.hexdigest(str).upcase
-
-      @merchant_id = "MS34166973"
-      @trade_info = aes
-      @trade_sha = sha
-      @version = "1.4"
 
       render layout: false
     end
