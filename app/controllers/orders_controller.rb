@@ -68,9 +68,10 @@ class OrdersController < ApplicationController
         Version: 1.4,
         RespondType: "JSON",
         TimeStamp: Time.now.to_i,
-        MerchantOrderNo: "#{@payment.id}WW",
+        MerchantOrderNo: "#{@payment.id}",
         Amt: @order.total_amount.round.to_i,
         ItemDesc: @order.sn,
+        ReturnURL: spgateway_return_url,
         Email: @order.user.email,
         LoginType: 0
       }.to_query
