@@ -10,8 +10,12 @@
           <% end %>
         </div>
         <div class="product-info">
-          <%= product.name %>
-          $<%= product.price.round %>
+          <h6>
+            <%= product.name %>
+          </h6>
+          <h6>
+            $<%= product.price.round %>
+          </h6>
         </div>
         <div>
           <%= link_to add_to_cart_product_path(product), method: :post, remote: true do %>

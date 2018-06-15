@@ -17,10 +17,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :orders, only: [:create, :index, :destroy]
+  resources :orders, only: [:create, :index, :destroy] do
+    post :checkout_spgateway, on: :member
+  end
 
   resources :order_items
 
+  post 'spgateway/return'
 
   namespace :admin do
     resources :products, except: [:show]

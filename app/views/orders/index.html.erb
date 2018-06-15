@@ -36,9 +36,14 @@
         <div class="status-area">
           <h5>Payment Status: <%= order.payment_status %></h5>
           <h5>Shipping Status: <%= order.shipping_status %></h5>
+          <% if order.payment_status == 'unpaid' %>
+            <%= link_to checkout_spgateway_order_path(order), method: :post do %>
+              <button class="btn btn-primary">Pay Now</button>
+            <% end %>
+          <% end %>
+          
           <button class="btn btn-primary">Credit Card</button>
           <button class="btn btn-primary">Web ATM</button>
-          <button class="btn btn-primary">ATM</button>
           <%= link_to order_path(order), method: :delete, data: {confirm: "Are you sure to delete Order ##{order.sn} ?"} do %>
             <button class="btn btn-outline-danger">Cancel Order</button>
           <% end %>   
