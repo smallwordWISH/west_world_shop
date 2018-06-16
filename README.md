@@ -1,24 +1,9 @@
-# README
+# West World Shop
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Demonstrate online retailer cart, order and payment system with Spgateway(智付通) API.
 
-Things you may want to cover:
+Spgateway test platform: https://cwww.spgateway.com/
 
-* Ruby version
+## Payment system
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Credit card test number: 4000-2211-2222-2222
