@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = current_user.orders
+    @orders = current_user.orders.order(created_at: :desc)
   end
 
   def destroy
