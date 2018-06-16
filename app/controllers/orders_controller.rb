@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order, only: [:destroy, :checkout_spgateway]
+  skip_before_action :verify_authenticity_token, only: [:checkout_spgateway]
 
   def create
     if current_cart.cart_items.length == 0
