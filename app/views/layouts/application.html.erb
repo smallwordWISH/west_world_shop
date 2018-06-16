@@ -18,7 +18,7 @@
                 <div><%= link_to 'Admin panel', admin_root_path %></div>
               <% end %>
             <% end %>
-            <div class="cart-btn">Cart</div>
+            <div class="cart-btn">Cart <%= "( #{calculate_cart_total_quantity(current_cart.cart_items)} )" if current_cart.cart_items.length != 0 %></div>
             <div><%= link_to 'Order', orders_path %></div>
             <% if current_user %>
               <div><%= link_to 'Logout', destroy_user_session_path, method: :delete %></div>

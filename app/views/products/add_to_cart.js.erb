@@ -1,5 +1,7 @@
 var html = '<%= j render partial: "shared/cart" %>';
 var tableHtml = '<%= j render partial: "shared/cart_table" %>'
+var cartBtnHtml = 'Cart <%= j "( #{calculate_cart_total_quantity(current_cart.cart_items)} )" if current_cart.cart_items.length != 0 %>'
 
 $('.cart-panel').html(html);
 $('.cart-card .card-body').html(tableHtml);
+$('.cart-btn').html(cartBtnHtml);
