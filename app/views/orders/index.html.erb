@@ -1,53 +1,59 @@
 <div class="container">
-  <% @orders.each do |order| %>
-    <div class="card order-card">
-      <div class="card-header">
-        <h6>Order #<%= order.sn %></h6>
-      </div>
-      <div class="card-body">
-        <div class="product-area">
-          <table class="table">
-            <% order.order_items.each do |order_item| %>
-              <tr>
-                <td><%= order_item.product.name %></td>
-                <td><%= order_item.quantity %></td>
-                <td>$<%= order_item.calculate_subtotal %></td>
-              </tr>
-            <% end %>
-            <tr>
-              <td>Total Amount:</td>
-              <td></td>
-              <td>$<%= order.total_amount %></td>
-            </tr>
-          </table>
+  <% if @orders.length != 0 %>
+    <% @orders.each do |order| %>
+      <div class="card order-card">
+        <div class="card-header">
+          <h6>Order #<%= order.sn %></h6>
         </div>
-        <div class="shipping-area">
-          <div class="card">
-            <div class="card-header">
-              <h6>Shipping Information</h6>
-            </div>
-            <div class="card-body">
-              <p>Shipping Name: <%= order.shipping_name %></p>
-              <p>Shipping Phone: <%= order.shipping_phone %></p>
-              <p>Shipping Address: <%= order.shipping_address %></p>
+        <div class="card-body">
+          <div class="product-area">
+            <table class="table">
+              <% order.order_items.each do |order_item| %>
+                <tr>
+                  <td><%= order_item.product.name %></td>
+                  <td><%= order_item.quantity %></td>
+                  <td>$<%= order_item.calculate_subtotal %></td>
+                </tr>
+              <% end %>
+              <tr>
+                <td>Total Amount:</td>
+                <td></td>
+                <td>$<%= order.total_amount %></td>
+              </tr>
+            </table>
+          </div>
+          <div class="shipping-area">
+            <div class="card">
+              <div class="card-header">
+                <h6>Shipping Information</h6>
+              </div>
+              <div class="card-body">
+                <p>Shipping Name: <%= order.shipping_name %></p>
+                <p>Shipping Phone: <%= order.shipping_phone %></p>
+                <p>Shipping Address: <%= order.shipping_address %></p>
+              </div>
             </div>
           </div>
+          <div class="status-area">
+            <h5>Payment Status: <%= order.payment_status %></h5>
+            <h5>Shipping Status: <%= order.shipping_status %></h5>
+            <% if order.payment_status == 'unpaid' %>
+              <% Payment::PAYMENT_METHODS.each do |method| %>
+                <%= link_to checkout_spgateway_order_path(order, payment_method: method), method: :post do %>
+                  <button class="btn btn-primary"><%= method %></button>
+                <% end %>
+              <% end %> 
+            <% end %>
+            <%= link_to order_path(order), method: :delete, data: {confirm: "Are you sure to delete Order ##{order.sn} ?"} do %>
+              <button class="btn btn-outline-danger">Cancel Order</button>
+            <% end %>   
+          </div>
         </div>
-        <div class="status-area">
-          <h5>Payment Status: <%= order.payment_status %></h5>
-          <h5>Shipping Status: <%= order.shipping_status %></h5>
-          <% if order.payment_status == 'unpaid' %>
-            <% Payment::PAYMENT_METHODS.each do |method| %>
-              <%= link_to checkout_spgateway_order_path(order, payment_method: method), method: :post do %>
-                <button class="btn btn-primary"><%= method %></button>
-              <% end %>
-            <% end %> 
-          <% end %>
-          <%= link_to order_path(order), method: :delete, data: {confirm: "Are you sure to delete Order ##{order.sn} ?"} do %>
-            <button class="btn btn-outline-danger">Cancel Order</button>
-          <% end %>   
-        </div>
-      </div>
-    </div>   
+      </div>   
+    <% end %>
+  <% else %>
+  <div class="text-center">
+    <em>There is no order.</em>
+  </div>
   <% end %>
 </div>
