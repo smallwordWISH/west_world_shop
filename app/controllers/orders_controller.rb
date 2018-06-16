@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
       end
 
       current_cart.destroy
-      UserMailer.notify_order_create(order).deliver_now!
+      # UserMailer.notify_order_create(order).deliver_now!
 
       redirect_to orders_path
     else
@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    if @order.payment_status == 'Unpaid'
+    if @order.payment_status == 'unpaid'
       if @order.destroy
         flash[:notice] = "Order has been canceled."
       else
